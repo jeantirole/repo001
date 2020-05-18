@@ -1,0 +1,198 @@
+#테이블의 구조 확인
+desc [테이블명];
+
+desc.db; 
+
+# Field : 컬럼명 
+# Type : 자료형태 
+# Null : No 
+# Key : PRI or 아무것도 없는지 
+
+desc time_zone_name; 
+
+
+# DB 만들기
+create [DB명]
+create database my_db;
+show databases; 
+
+
+# Table 만들기
+use my_db; 
+create table [table명]
+create table exam1 { [컬럼명] [자료형](10), 
+                     [컬럼명] [자료형](10),
+                     [컬럼명] [자료형](10),
+                   }
+
+use my_db3; 
+create table exam3(
+  name varchar(20),
+  id   varchar(10),
+  city varchar(30)); 
+
+mysql> create database my_db3;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| my_db              |
+| my_db2             |
+| my_db3             |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use my_db3;
+Database changed
+mysql> create table exam3(
+    ->   name varchar(20),
+    ->   id   varchar(10),
+    ->   city varchar(30));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_my_db3 |
++------------------+
+| exam3            |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> drop table exam3;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> drop database my_db3;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show databses;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'databses' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| my_db              |
+| my_db2             |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql>
+
+
+create database my_db2;
+show databases;
+
+use my_d2;
+create table exam2(
+  id varchar(12)
+);
+
+
+create table
+
+## 열을 추가, 삭제, 변경하는 명령어. 
+-> alter table
+-> update 테이블명 set [컬럼]="__" where name='홍길동'
+
+
+
+## 데이터를 입력하는 것의 명령어. 
+-> insert into _____ values ____
+
+
+## 데이터를 조회하는 명령어.
+select
+
+## 삭제
+delete
+
+
+### 01 테이블을 만들고, 열을 추가하기 
+create database test_db;
+use test_db; 
+create table exam1(
+  name varchar(10),
+  phone varchar(15),
+  id varchar(10),
+  city varchar(10)
+)
+
+
+alter table exam3 add email varchar(20);
+desc exam3; 
+
+
+=====================================================
+### 02 열을 삭제하기 
+
+alter table exam3 drop city; 
+desc exam3; 
+
+### 03 열을 변경한다. 
+
+alter table exam3 change id id_num
+varchar(10);
+desc exam3; 
+
+### 실습 
+
+table : exam2
+col : name1, phone1, id1, city1 
+
+01 열추가 email1
+02 열삭제 city1
+03 열변경 id1 -> id_num1 
+
+
+### 04 변경된 테이블을 확인한다. 
+
+### 05 테이블을 만들고, 데이터를 입력하기 
+
+inser into 테이블명(컬럼명1, 컬럼명2, ... )
+      values('김철수','031-44',값3,값4);
+
+insert into exam3(name, id_num, email) values("김철수","20123","abcd")
+
+
+
+
+
+
+### 06 입력된 데이터를 변경하기 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
