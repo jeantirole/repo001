@@ -1,0 +1,453 @@
+#테이블의 구조 확인
+desc [테이블명];
+
+desc.db; 
+
+# Field : 컬럼명 
+# Type : 자료형태 
+# Null : No 
+# Key : PRI or 아무것도 없는지 
+
+desc time_zone_name; 
+
+
+# DB 만들기
+create [DB명]
+create database my_db;
+show databases; 
+
+
+# Table 만들기
+use my_db; 
+create table [table명]
+create table exam1 { [컬럼명] [자료형](10), 
+                     [컬럼명] [자료형](10),
+                     [컬럼명] [자료형](10),
+                   }
+
+use my_db3; 
+create table post(
+  post_no varchar(6),
+  post_dong   char(30),
+  post_addr char(60),
+  ddd char(40)); 
+
+mysql> create database my_db3;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| my_db              |
+| my_db2             |
+| my_db3             |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use my_db3;
+Database changed
+mysql> create table exam3(
+    ->   name varchar(20),
+    ->   id   varchar(10),
+    ->   city varchar(30));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_my_db3 |
++------------------+
+| exam3            |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> drop table exam3;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> drop database my_db3;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show databses;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'databses' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| my_db              |
+| my_db2             |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql>
+
+
+create database my_db2;
+show databases;
+
+use my_d2;
+create table exam2(
+  id varchar(12)
+);
+
+
+create table
+
+## 열을 추가, 삭제, 변경하는 명령어. 
+-> alter table
+-> update 테이블명 set [컬럼]="__" where name='홍길동'
+
+
+
+## 데이터를 입력하는 것의 명령어. 
+-> insert into _____ values ____
+
+
+## 데이터를 조회하는 명령어.
+select
+
+## 삭제
+delete
+
+
+### 01 테이블을 만들고, 열을 추가하기 
+create database test_db;
+use test_db; 
+create table exam1(
+  name varchar(10),
+  phone varchar(15),
+  id varchar(10),
+  city varchar(10)
+)
+
+
+alter table exam3 add email varchar(20);
+desc exam3; 
+
+
+=====================================================
+### 02 열을 삭제하기 
+
+alter table exam3 drop city; 
+desc exam3; 
+
+### 03 열을 변경한다. 
+
+alter table exam3 change id id_num
+varchar(10);
+desc exam3; 
+
+### 실습 
+
+table : exam2
+col : name1, phone1, id1, city1 
+
+01 열추가 email1
+02 열삭제 city1
+03 열변경 id1 -> id_num1 
+
+
+### 04 변경된 테이블을 확인한다. 
+
+### 05 테이블을 만들고, 데이터를 입력하기 
+
+inser into 테이블명(컬럼명1, 컬럼명2, ... )
+      values('김철수','031-44',값3,값4);
+
+insert into diplomas4(
+
+insert into exam3(name, id_num, email) values("김철수","20123","abcd")
+
+### 06 입력된 데이터를 변경하기 
+
+
+
+
+mysql -uroot -p
+
+
+
+
+
+0519
+
+---->
+
+create table post2(
+  post_no varchar(6) Not null, #우편번호
+  post_dong char(30) Not null, #동이름
+  post_addr char(60) Not null, #주소
+  ddd char(40)       Not null, #DD 전화 지역번호
+  primary key(post_no)
+); 
+
+
+create table DIPLOMAS4(
+  COURSE varchar(20) Not null, 
+  CODE varchar(30) Not null, 
+  NUM int(3) Not null,
+  MAKE_DATE date Not null, 
+  primary key(COURSE, CODE, MAKE_DATE)
+); 
+
+
+desc.diplomas2
+
+
+
+
+### column list 생략가능 
+
+inser into 테이블명(컬럼명1, 컬럼명2, ... )
+      values('김철수','031-44',값3,값4);
+
+insert into diplomas4(course, code, num, make_date)
+             values('eng','eng1234', 99 ,'2020-05-19')
+             values('math','math1234', 99 ,'2020-05-19')
+             values('art','art1234', 99 ,'2020-05-19')
+             values('sci','sci1234', 99 ,'2020-05-19')
+             values('fe','fe1234', 99 ,'2020-05-19')
+
+
+
+
+###
+
+create table exam30 (
+  name varchar(10),
+  phone varchar(15),
+  id varchar(10),
+  id varhar(12));
+
+
+###
+
+alter table exam3 modify id varchar(15);
+desc exam3;
+
+
+### table 에서 전체열을 선택하는 방법 
+ 
+select*from [table];
+
+
+### 조건을 추가. 컬럼명 선택 
+
+select*from [table] where [컬럼명]="";
+select*from diploma4 where course="ENG";
+
+###
+01. diplomas 데이터를 복수를 넣는다. 5개
+02. select 문을 이용해서 전체를 검색해 본다. 
+03. select 문의 where을 이용해서 원하는 조건을 검색해 본다.
+04. 원하는 조건으로 검색하되 컬럼은 course, num만 보이게 한다. 
+
+
+## 조건을 만족하는 컬럼만 출력하는 방법 
+select course,code from diplomas4 where course="ENG";
+
+
+
+## SELECT 문을 이용해서 전체를 검색
+SELECT * FROM DIPLOMAS;
+DESC DIPLOMAS; 
+
+
+## GROUP BY
+SELECT course, count(*) FROM diplomas4 group by course; 
+
+SELECT make_date, count(*) FROM diplomas4 group by make_date; 
+
+
+
+
+##DDL
+
+CREATE
+DROP
+ALTER
+
+##DML
+
+INSERT 
+insert into [table] (col1,col2, ... )
+       values ('a',1,'c',...),
+       valyes ('a',1,'c',...),
+       valyes ('a',1,'c',...));
+
+Select 
+
+select * from [table1],[table2] where [col]=" sth " 
+select [column] from [table] ... 
+
+create table [new] as select from [table]
+
+group by
+select col from table group by col 
+select col from table where whrjs grouby col 
+select col from table group by col having [terms]
+
+select col from table where term 
+ groupby 
+
+
+UPDATE
+
+update [table] set [table]
+      where = ""
+
+DELETE
+
+##DCL
+
+GRANT
+
+
+
+create table DIPLOMAS5(
+  id int(3) Not null, 
+  type varchar(30) Not null, 
+  name varchar(30) Not null, 
+  primary key(id, type, name)
+); 
+
+
+insert into diplomas5 (id, type, name)
+             values('1','고려시대', '서희'),
+             values('2','고려시대', '최충헌'),
+             values('3','삼국시대', '계백' ),
+             values('4','삼국시대', '김춘추' ),
+             values('5','삼국시대', '광개토왕' ),
+             values('6','조선시대', '정조' ),
+             values('7','조선시대', '영조' );
+
+insert into diplomas11(id, type, name)
+
+
+insert into diplomas11 (id, type, name)
+             values('1','고려시대', '서희'  );
+
+insert into diplomas11 (id, type, name)
+             values('2','고려시대', '최충헌' );
+
+insert into diplomas11 (id, type, name)
+             values('3','삼국시대', '계백' );
+
+insert into diplomas11 (id, type, name)
+             values('4','삼국시대', '김춘추' );
+
+insert into diplomas11 (id, type, name)
+             values('5','삼국시대', '광개토왕' );
+
+insert into diplomas11 (id, type, name)
+            values('6','조선시대', '정조' );
+
+insert into diplomas11 (id, type, name)
+            values('7','조선시대', '영조' );
+
+## 삼국시대와 조선시대의 그룹화 시킨 사람들은 각각 몇명인지? 
+
+##hint
+
+group by
+select col from table group by col 
+select col from table where whrjs grouby col 
+select col from table group by col having [terms]
+
+
+select 
+
+
+
+select type, count(*) from diplomas5 where type in ("삼국시대","조선시대") group by type; 
+
+
+
+
+select name,count(*) from diplomas5 group by name having type in = "삼국시대";
+select type,count(*) from diplomas5 group by type having type in = ("삼국시대","조선시대");
+
+select type, count(*) As cnt FROM diplomas5 group by type
+                                            having cnt=3
+                                            order by type DESC; 
+
+select * from people;
+
+
+
+## 기존의 테이블을 이용해서 새로운 테이블을 만들어 보겠다. 
+
+create table diplomas7 as select * from diplomas5; 
+desc diplomas5;
+
+
+delete and update ...! 
+group by and order by ...! 
+
+
+select * from diplomas7
+
+delete from diplomas7 where type="삼국시대";
+
+
+
+## 실습 
+
+(1) 기존의 테이블 diplomas5 를 이용해서 diplomas11을 만든다.
+ 
+(2) hint alter table 을 이용해서 제약조건을 추가한다. 
+alter table exam3 modify id varchar(15);
+desc exam3;
+
+alter table[] add primary key [] 
+
+alter table diplomas11
+  add constraint id_pk primary key(id);
+
+
+
+(3) 데이터를 7개를 diplomas5와 동일한 데이터로 넣는다. 
+
+(4) group by를 이용해서 각 시대별 사람은 몇명인지 확인한다. 
+
+select type,count(*) from diplomas11 group by type;
+
+(5) order by를 이용해서 큰 값이 앞으로 가도록 정렬한다. 
+
+select type,count(*) as cnt from diplomas11 group by type order by cnt desc;
+
+
+(6) having 을 이용해서 각 시대별 사람이 2명인 그룹만 출력한다. 
+
+select type,count(*) as cnt from diplomas11 group by type having cnt=2;
+
+
+(8) update 를 써서 조선시대의 한 사람을 다른 인물로 대체한다.
+
+update [table] set [col] = 'value] where [term];
+
+update diplomas11 set name = "세종대왕" where id=7 and type="조선시대" 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
