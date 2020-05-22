@@ -1,0 +1,36 @@
+
+요약보고
+
+# country 의 종류는? 21 
+select distinct country from customers; 
+
+
+# country 각각의 개수는? 
+select distinct customerid, country,count(*) from customers group by country;
+
+
+# city 종류는 ? 69
+select distinct city from customers; 
+
+# city 각각의 개수는?
+select distinct customerid, city,count(*) as cnt from customers group by city order by cnt desc;
+
+
+# 고객 숫자가 가장 많은 city는 ? = London
+select city,count(*)as cnt from customers group by city order by cnt desc;
+
+
+# City 각각의 개수를 count, 내림차순으로 정렬 
+select city,count(*)as cnt from customers group by city order by cnt desc;
+
+
+# PostalCode 각각의 개수를 count, 내림차순으로 정렬 
+select postalcode,count(*)as cnt from customers group by postalcode order by cnt desc;
+
+
+# Postal Code, City, Country 를 동시에 출력, Country 별로 묶기 
+select postalcode,city,country from customers order by country desc;
+
+
+# City 가 sevilla 또는 Barcelona 인 Spain 데이터의 고객이름 얻기 
+select customername from customers where country="Spain" and (city = "Sevilla" or city = "Barcelona");

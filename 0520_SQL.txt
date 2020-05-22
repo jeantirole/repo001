@@ -1,0 +1,39 @@
+### SQL 
+
+### MySQL, SQL Server(MS), MS Access, 
+### Sybase, Informix ... Oracle 
+
+select * from customers; 
+
+## 실습 
+## CustomerID CustomerName, City 를 검색해보자. 
+
+Select * from CustomerID, CustomerName, City as Customers; 
+
+SQL
+
+DDL create alter drop rename truncate 
+
+DML select, insert, update, delete
+     
+DCL grant revoke 
+
+
+
+## 중복을 제외한 
+
+Select distinct country from customers; 
+
+
+## 중복을 제외한 ## COUNT 
+
+Select count(distinct country) from customers; 
+
+## 
+
+Select count(*) AS DistinctCountries
+ from (select distinct country from customers);
+
+지쳐보여ㅕ ~~~ 
+
+
