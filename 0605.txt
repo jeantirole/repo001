@@ -1,0 +1,187 @@
+Keras Vs TensorFlow 
+
+TensorFlow
+
+= framework 
+
+CNN
+
+Convolutional Neural Network 
+
+CNN 
+
+CNN 의 구조 
+
+affine & Relu => affine & Relu 
+
+(Conv => Relu) => Pooling
+(Conv => Relu) => Pooling 
+(Affine => Relu) x 2
+
+Total size ; N (i.e. N x N)
+Filter size ; F (i.e. F x F)
+Output size ; k:=(N-F)/stride + 1 where k is an integer.
+
+
+Output layer = convolutional layer = activation maps 
+
+
+Activation function을 쓰는 이유: 
+
+행렬곲의 결과값이 정량적인 값(ex. 6000, 8000) 으로 나오기 때문에, 그 특징이
+있다, 없다의 비선형 결과값으로 돌려주기 위해서. 
+
+
+Sigmoid 가 아닌 Relu 를 사용하는 이유: 
+Back Propagation 계산에 Relu 가 더 용이하기 때문에. 
+
+
+
+k = 28 - 3 + 1  = 26 
+
+so 26 * 26 이 나왔구 ~ 
+
+
+=========================================================================
+ ------------------------------------------------------------------------
+
+https//archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset.zip
+
+Oracle 
+
+Virture Box 
+
+VMWARE
+
+rm r2.txt 2>error.log 
+
+No Ga Da Zak Up 
+
+w
+
+mkdir -p 
+
+중간 디렉토리 생성
+
+mkdir -p a1/a2/a3
+
+=================
+
+cent OS 
+
+Ubuntu
+
+==================
+
+linux 
+
+
+
+
+https://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset.zip
+
+https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data
+
+http://easyflexusa.com/upload//documents/Gas_CSST_FLYER.pdf?v=202006042301
+
+https://www.7-zip.org/a/7z1900.exe
+
+https://www.nchsoftware.com/zip/zipplus.exe
+
+
+
+sudo yum install htop 
+
+wget -o data.zip --no-check-certificate [URL]
+
+
+Standard Out [data] 
+Standard Error [Error Message]
+
+
+Shell & Kernel 
+
+nano mk.sh
+
+
+#!/bin./bash
+
+
+$ nano mk.sh
+
+$ ./mk.sh
+
+
+
+==========================
+nano 파일명 # 쉘 스크립트 파일명 지정 및 작성 
+
+chmod +x mk.sh # 쉘 스크립트 변환 
+
+./파일명 # 쉘 스크립트 실행 
+
+ls -l # 실행확인
+
+=========================== 
+
+GUI Vs CLI 
+
+ps, top, htop 명령 -프로세스 확인 명령어 
+
+find locate whereis 
+
+sudo su 
+
+useradd
+
+
+ps
+
+ps aux 
+
+kill [PID]
+
+sudo top 
+
+=============================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
