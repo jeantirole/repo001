@@ -1,0 +1,290 @@
+# M5 Competition preparation 
+
+
+
+#
+M5 - Three shades of Dark: Darker magic 
+
+EDA : dynamic rolling lag 
+
+Model : lightGBM 
+
+tweedie 모델을 사용 
+
+왜 썼는지는.. 링크 참조하라고 함 
+# https://www.kaggle.com/c/m5-forecasting-accuracy/discussion/140564
+# https://www.kaggle.com/c/m5-forecasting-accuracy/discussion/143070
+
+## 'tweedie_variance_power': 1.1
+# default = 1.5
+# set this closer to 2 to shift towards a Gamma distribution
+# set this closer to 1 to shift towards a Poisson distribution
+# my CV shows 1.1 is optimal 
+
+
+
+
+
+
+
+
+*** Boosting -> proceding with adding weight on error data. 
+
+
+
+
+
+
+
+
+Gradient Boosting Machine(GBM) 
+
+Ensemble xgboost 
+
+
+
+XGboost : level-wise tree growth 
+
+LightGBM : leaf-wise tree growth 
+
+
+
+################################
+
+Bagging vs Boosting 
+
+
+
+# Bagging 
+
+Random Sampleing => Modeling => Combine each predict model using avg or majority vote 
+
+# Boosting 
+
+Modeling => Weighted Row data => Weighted Row Data => Wei...
+
+
+
+
+## Boosting Models 
+
+AdaBoost 
+
+GBM 
+
+Xgboost 
+
+Light GBM 
+
+
+
+gridsearch 를 활용해서 최적의 hyperparameter 를 찾아보자.. 
+
+
+*** 중요 파라미터들 *** 
+
+훈련량 ? learning_rate / eta (★★★)
+
+최소 cost 를 찾기 위한 반복(Iteration)을 할 때, 
+
+w값들 사이의 간격을 지정해주는 작업이다. 
+
+
+1) Learning Rate 가 너무 클 때, 
+최적의 값으로 수렴하지 않고, 발산해버리는 경우. Overshooting 이 발생함 
+
+2) Learning Rate 가 너무 작을 때, 
+수렴의 속도가 너무 느리고, local min 에 빠질 가능성이 존재함. 
+
+
+=> 이를 방지해 주기 위해서 Feature Scaling 을 해주는데, 
+
+1) Normalization 
+표본들의 값을 모두 0~ 1 사이의 값으로 변환 하는 방법. 
+
+2) Standardization
+표본들의 값을 가우시안 분포의 값으로 변환 하는 방법. 
+
+
+
+
+Overfit 해결방법 
+
+1) 많은 수의 row 
+
+2) 적은 수의 col or feature 
+
+
+반복량 ? num_iterations / nrounds (★★★)
+
+lgb 는 기본값이 100이라 너무 적은 편, 1000이상 정도 해주면 좋다. 
+
+early_stopping 이 있으면 최대한 많이 줘도 (10,000~) quf tkdrhksdl djqtek. 
+
+
+조기멈춤 ? early_stopping_round / early_stopping_rounds(★★)
+
+validation셋에 더이상 발전이 없으면 그만두게 설정할때 이를 몇번동안 발전이 없으면 그만두게 할지 여부.
+
+
+나무 깊이 ? max_depth (★★★)
+-1로 설정하면 제한없이 분기한다. 많은 feature가 있는 경우 더더욱 높게 설정하며, 파라미터 설정시 제일 먼저 설정한다.
+default는 -1로 제한없이 분기한다.
+
+
+행 샘플링 ? bagging_fraction / subsample (★★)
+Row sampling, 즉 데이터를 일부 발췌해서 다양성을 높이는 방법으로 쓴다. 민감한 옵션이므로, Column sampling과 잘 섞어서 쓴다.
+lightGBM의 GOSS옵션을 쓴다고 하면 해당 옵션을 쓰면 에러가 난다. GOSS에서 알아서 샘플링하는 과정이 있기 때문
+
+열 샘플링 ? feature_fraction / colsample_bytree (★★)
+컬럼에 대한 샘플링을 통해 각각의 다양성을 높인다. 랜덤포레스트에 있는 기능이였으며, 보통은 정확도가 높아지는 면이 있다.
+컬럼 샘플링을 하지 않는 1이 기본값이나, 0.7~0.9 정도로 세팅하는 편이 일반적임
+
+샘플 스케일링 ? scale_pos_weight (★★)
+양성인 경우 이를 뻥튀기해준다. 불균형셋에서 유용할수 있으나 너무 많은 weight를 주는것은 오히려 정확도가 떨어진다. 기본값은 1이며 불균형이 얼마나 심한지에 따라 다르다. 1.1~1.5정도의 가벼운 조정은 경험상 괜춘.
+나빠지든 좋아지든 정확도에는 상당한 영향을 미치므로, 적어도 불균형셋에 대해서는 시도해보고 변화량을 보는걸 추천
+
+
+
+부스팅 방법 ? boosting / booster (★★★)
+XGBoost에서는 gblinear / gbtree / dart 지원
+lightGBM에서는 
+
+rf (랜덤포레스트) / 
+gbdt (Gradient Boosted Decision Trees) / 
+dart (드랍아웃 Regression Trees) / 
+goss (Gradient-based One-Side Sampling)을 쓴다.
+
+기본적인 이론적 이해가 있은 뒤에 boosting을 고른다. 기본값은 gbdt로 대부분 쓰이며, 정확도가 중요할때는 딥러닝 드랍아웃과 같은 dart적용, 그리고 논문에서 강조한 샘플링을 이용한 goss 를 적용가능하다.
+GOSS는 계산속도를 상당히 줄여주지만 약간의 예측력 손상(혹은 규제로 작용)이 있을 수 있다.
+DART는 일반적인 경우 조금 더 나은 예측력을 보여주지만, 절대적인건 아니다.
+
+Metric / Loss 관련 파라미터 (★★★)
+당연히, 학습하려는 목적에 따라 다음의 metric을 설정하여야 하며, lightGBM에서 제공하는 파라미터는 다음과 같다.
+binary(Cross Entropy)
+multiclass(Cross Entropy)
+regression_l2(MSE)
+regression_l1 (MAE)
+mape (MAPE)
+poisson (Log Transformation)
+quantile (Quantile)
+huber (Huber loss, MAE approx)
+fair (Fair loss, MAE approx)
+gamma (Residual Deviance)
+lambdarank
+tweedie
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+n_estimators: 반복하려는 트리의 개수
+
+
+
+# eta [default=0.3, alias: learning_rate]
+
+range [0,1]
+
+
+Step size shrinkage used in update to prevent overfitting.
+
+After each boosting step, we can directly get the weights of new features, 
+
+and eta shrinks the geature weights to make the 
+
+boosting process more conservative.
+
+
+
+
+
+# gamma [default=0, alias: min_split_loss]
+
+range: [0,∞]
+
+
+Minimum loss reduction requited to make a further partition on a leaf node of the tree. 
+
+The larger gamma is, the more conservative the algorithm will be. 
+
+
+
+
+# max_depth [default=6]
+
+Maximum depth of a tree. Increasing this value will make the model complex and more
+
+liukely to overfit. 0 is only accepted in 
+
+lossguiided growing policy 
+
+
+# min_child_weight [default=1]
+
+min_child_weight 
+
+
+
+
+max_depth: 트리의 최대 깊이
+
+
+min_child_samples: 리프 노드가 되기 위한 최소한의 샘플 데이터 수 
+
+num_leaves: 하나의 트리가 가질 수 있는 최대 리프 개수 
+
+feature_fraction: 트리를 학습할 때마다 선택하는 feature의 비율 
+
+
+reg_lambda: L2 regularization
+
+reg_alpha: L1 regularization 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
