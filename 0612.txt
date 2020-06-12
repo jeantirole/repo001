@@ -1,0 +1,103 @@
+## 전이학습 
+
+# image generator
+
+# 성능향상 시키는 방법
+
+Cov 단계 more 
+
+Epoch more 
+
+image size 덜 축소하기 
+
+
+# AI Hub 
+
+
+
+
+
+from urllib.request import urlretrieve
+from urllib.parse import quote_plus
+from bs4 import BeautifulSoup
+from selenium import webdriver
+import time
+
+
+# search = ["에펠탑", "구원의 예수상", "개선문", "만리장성", "타지마할", "숭례문", "모아이석상", "본존불", "금문교", "자유의 여신상",
+#           "피사의 사탑", "콜로세움", "산티아고 베르나베우", "스핑크스" , "부르즈 할리파"]
+
+search = [
+"Eiffel Tower"
+,"Cristo Redentor"
+,"Triumphal Arch"
+,"Wanl? Changcheng"
+,"Taj Mahal"
+,"Sungnyemun Gate"
+,"Moai"
+,"Seokguram"
+,"Golden Gate"
+,"Statue of Liberty"
+,"Torre di Pisa"
+,"Colosseum"
+,"Santiago Bernabeu"
+,"Sphinx"
+,"Burj Khalifa"
+,"London Eye"
+,"London Tower Bridge" 
+]
+
+
+driver = webdriver.Chrome()
+# driver.get(url)
+# for i in range(500):
+#     driver.execute_script("window.scrollBy(0,10000)")
+
+
+
+for i in range(8,18):
+    name = search[i]
+    url = "https://www.google.co.in/search?q=" + search[i] + "&tbm=isch"
+    
+    driver.implicitly_wait(10) # seconds
+    driver.get(url)
+
+    
+    driver.execute_script("window.scrollBy(0,10000)")
+    time.sleep(2)
+    driver.execute_script("window.scrollBy(0,10000)")
+    time.sleep(2)
+    driver.execute_script("window.scrollBy(0,10000)")
+    time.sleep(2)
+    driver.execute_script("window.scrollBy(0,10000)")
+    time.sleep(2)
+    driver.execute_script("window.scrollBy(0,10000)")
+    time.sleep(2)
+    driver.execute_script("window.scrollBy(0,10000)")
+    time.sleep(2)
+    driver.execute_script("window.scrollBy(0,10000)")
+    time.sleep(2)
+                
+
+    html = driver.page_source
+    soup = BeautifulSoup(html)
+
+    img = soup.select('.rg_i.Q4LuWd')
+    n = 1
+    imgurl = []
+    for i in img:
+        try:
+            imgurl.append(i.attrs["src"])
+        except KeyError:
+            imgurl.append(i.attrs["data-src"])
+            
+    for i in imgurl:
+        urlretrieve(i, "E:\\Eric_Github\\Image_project\\" + name + str(n) + ".jpg")
+        n += 1
+        print(imgurl)
+        if (n == 500 ):
+            break
+        
+        
+        
+driver.close()
