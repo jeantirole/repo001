@@ -1,0 +1,226 @@
+submission_file # 제출용(60980, 29) - 아이템별 F1~F28 (미래의 향후 28일간 판매량을 예측)
+calendar_df     # 캘린더(1969,14) - 날짜별 이벤트 및 snap 정보
+sellprice       # 판매금액(6841121,4) - 스토아, 아이템별 판매 가격
+train_sales     # 판매개수(30490, 1919) - 날짜별(d_1~d_1903) 판매개수
+
+
+days = # 1~ 1913 +1 
+time_series_columns = [f'd_{i}' for i in days]
+
+
+# 30490의 id중에 1000개를 임의로 선택
+ids = np.random.choice(train_sales['id'].unique().tolist(), 1000)  
+
+# 위젯 설정 
+series_ids = widgets.Dropdown(
+    options=ids,
+    value=ids[0],
+    description='series_ids:')
+
+# 
+
+def plot_data(series_ids):
+    df = train_sales.loc[train_sales['id'] == series_ids][time_series_columns]  # series_ids의 데이터를 선택
+    df = pd.Series(df.values.flatten()) 
+
+    df.plot(figsize=(20, 10), lw=2, marker='*')
+    df.rolling(7).mean().plot(figsize=(20, 10), lw=2, marker='o', color='orange') # 이전 7개의 값을 평균을 내어 계산
+    plt.axhline(df.mean(), lw=3, color='red')  # 아이템의 평균의 기준 선
+    plt.grid()
+
+x.loc[] # col name 으로 찾아보기 
+x.iloc[]
+x.values # 각 행의 값들을 보여주기 
+
+def plot_data 
+
+# widget 
+
+# Import widgets (*****) 
+from ipywidgets import widgets, interactive, interact  # 인터렉티브한 시각화 가능.
+import ipywidgets as widgets
+from IPython.display import display
+
+# axis=0 은 col 별로 더한다 
+# axis=1 은 row 별로 더한다 
+
+pd.Series((series_data == 0).sum(axis=1) / series_data.shape[1]).hist(figsize=(25, 5), color='red')
+
+# reference_study 
+
+axis = 0 row를 없앤다.. ! 
+
+axis = 1 col을 없앤다.. ! 
+
+
+array([[ 4,  6,  8, 10],
+       [20, 22, 24, 26],
+       [36, 38, 40, 42],
+       [52, 54, 56, 58]])
+
+
+
+
+array([[[ 0,  1,  2,  3], [ 4,  5,  6,  7]],
+
+       [[ 8,  9, 10, 11], [12, 13, 14, 15]],
+
+       [[16, 17, 18, 19], [20, 21, 22, 23]],
+
+       [[24, 25, 26, 27], [28, 29, 30, 31]]])
+
+
+4,2,4
+
+axis =0 (2,4) col 기준 합 
+
+axis =1 (4,4) row 기준 합   
+
+axis =2 (4,2) depth 기준 합   
+
+
+조건식 입력 했을 때, 
+
+True = 0
+
+False = 1
+
+
+pd.Series((series_data == 0).sum(axis=1) / series_data.shape[1]).hist(figsize=(25, 10), color='red')
+전체 col에서 팔리지 않은(비율이 1에 가까운) 데이터들이 훨씬 더 많다. 
+
+pd.Series(series_data.max(axis=1)).value_counts().head(20).plot(kind='bar', figsize=(25, 15))
+4,5,6,7,8,9 .. 개 순서대로 id별 1년간 팔린 숫자의 빈도수가 크다. 
+300 개가 넘어가는 판매량의 id가 별로 없다. 
+
+
+모델 만들기
+ - 예측 값은 가장 최근 28일간의 평균으로 넣어보자 
+
+
+
+series_data[:, -28:]
+
+개수 세어보기 ... ! 
+
+'numpy.ndarray' object
+
+
+numpy ndarray 다루기 
+
+data.ndim
+data.shape
+data.dtype 
+
+data[0]
+data[0][2]
+data[2,1] 
+
+data[2,1] =2 
+
+series_data[:, -28:]
+
+forecast = pd.concat([forecast] * 28, axis=1)  
+
+pd.concat 
+
+
+## Dataframe 병합 
+
+Merge or Concat
+
+
+
+
+forecast = pd.concat([forecast] * 28, axis=1)     # 30490개, 28열을 만든다.
+forecast.columns = [f'F{i}' for i in range(1, forecast.shape[1] + 1)] # 컬럼명을 만든다
+
+
+forecast.columns = [f'A']
+
+
+
+f'F{i}' for i in range(1, 
+
+
+x = np.linspace(0,14,100)
+print(x)
+y1 = np.sin(x)
+y2 = 2*np.sin(x+0.5)
+y3 = 4*np.sin(x+1.0)
+
+base_dir = "E:\\Eric_Github\\Kaggle\\m5-forecasting-accuracy\\"  # 기본 경로
+
+submission_file  = pd.read_csv(base_dir+"sample_submission.csv")   # 제출용(60980, 29) - 아이템별 F1~F28 (미래의 향후 28일간 판매량을 예측)
+calendar_df  = pd.read_csv(base_dir+"calendar.csv")                # 캘린더(1969,14) - 날짜별 이벤트 및 snap 정보
+sellprice = pd.read_csv(base_dir+"sell_prices.csv")                # 판매금액(6841121,4) - 스토아, 아이템별 판매 가격
+train_sales  = pd.read_csv(base_dir+"sales_train_validation.csv")  # 판매개수(30490, 1919) - 날짜별(d_1~d_1903) 판매개수
+
+
+d_cols = [c for c in sale_train_val.columns if 'd_' in c]
+
+column 조건별 call up 
+
+d_cols = [c for c in sale_train_val.columns if 'd_' in c]
+
+##
+
+
+Reduce DataFrame memory
+
+
+
+window.scrollby 를 사용 => 한번에 스크롤 다운 
+
+
+
+
+구동환경정리
+
+Local colab 을 사용 
+
+했을 때, epoch 당 속도가 많이 느렸음 
+
+
+
+구글 colab 을 사용 
+
+메모리 사용의 경우 27GB 까지 올라가는 것을 확인
+
+하지만, image_generator 를 통해서, 수만장의 이미지를 돌리자 중간에 runtime 이 부족해서 작동 stop
+
+하는 상황이 자주 발생하였음. 그래서 메모리 사이즈와 구동시간을 늘려주는 colab 유료 계정을 구매 후 진행 하였음. 
+
+
+ 
+
+연산속도 비교 
+
+CPU 
+
+200~210 Sec/Epoch 
+
+GPU
+
+4~5 Sec/Epoch 
+
+
+npy 로 만들었을 때, 데이터 크기 3 GB 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
