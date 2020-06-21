@@ -1,0 +1,33 @@
+Connec to your own node 
+
+Green on your netmap, 
+
+rm "SecurityTracer.exe" 
+
+in the Viper,,, find exe files 
+
+# scp
+
+download files 
+
+
+# BigBrother PC@32.30.118.58
+connect 32.30.118.58
+
+# Viper-Battlestation@215.172.203.202
+
+Analyze security systems using "probe" w
+Use "porthack" to break active security. 
+Scan for adjacent nodes using "scan" 
+Clear logs in the ~/log folder using "rm [Filename or *] 
+scp [filename] 
+
+32.30.11832.30.
+
+
+SSHCrack 22 
+ ^filename ^portnumber 
+
+connect [node] 
+
+find port num w
